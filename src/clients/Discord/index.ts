@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Client, Collection, GatewayIntentBits } from "discord.js";
-import { Command, Interaction, Job } from "../../types/Executors";
+import { Command, Interaction, Job } from "../../types/ClientExecutors";
 import Schedule from "node-schedule";
 import SPDatabase from "../../database";
-import { Log } from "../../util/Logger";
+import { Log } from "../../util/ClientLogger";
 import { BotConfig, DatabaseConfig } from "../../types/Config";
 import { JSONPackage } from "../../types/JSONPackage";
 import CLI from "../../cli";
@@ -13,7 +13,7 @@ import Config from "@src/modular/config";
 const nonPrivilegedIntents = [
 	GatewayIntentBits.Guilds,
 	GatewayIntentBits.GuildMembers,
-	GatewayIntentBits.GuildBans,
+	GatewayIntentBits.GuildModeration,
 	GatewayIntentBits.GuildEmojisAndStickers,
 	GatewayIntentBits.GuildIntegrations,
 	GatewayIntentBits.GuildWebhooks,
@@ -40,8 +40,6 @@ class Bot extends Client {
 	interactions: Collection<string, Interaction>;
 	jobs: Collection<string, Job>;
 	readonly database: SPDatabase;
-
-	readonly commandline: CLI;
 	readonly package: JSONPackage;
 	constructor() {
 		if (process.env.NODE_ENV === "development") {
@@ -61,7 +59,6 @@ class Bot extends Client {
 		this.config = Config.getClientConfig("discord");
 		this.dbConfig = require("../../config.js").database;
 		this.database = new SPDatabase(this.dbConfig);
-		this.commandline = new CLI(this, process.stdin, process.stdout);
 		this.package = require("../package.json");
 	}
 	async registerEvents() {
@@ -69,7 +66,7 @@ class Bot extends Client {
 		for (const [file, dir] of events) {
 			if (file.endsWith(".map")) continue;
 			const event: VoidFunction = await import(`${dir}/${file}`).then(m => m.default);
-			this.logger.info(`Loading Event ${file}`);
+			this.logger.info(`${this.shard?.ids[0] ?? "Discord Client"}`, `Loading Event ${file}`);
 			this.on(file.split(".")[0], event.bind(null, this));
 		}
 	}
@@ -78,7 +75,7 @@ class Bot extends Client {
 		for (const [file, dir] of commands) {
 			if (file.endsWith(".map")) continue;
 			const command: Command = await import(`${dir}/${file}`).then(m => m.default);
-			this.logger.info(`Loading Command ${file}`);
+			this.logger.info(`${this.shard?.ids[0] ?? "Discord Client"}`, `Loading Command ${file}`);
 			this.commands.set(command.name, command);
 		}
 	}
@@ -87,7 +84,7 @@ class Bot extends Client {
 		for (const [file, dir] of interactions) {
 			if (file.endsWith(".map")) continue;
 			const interaction: Interaction = await import(`${dir}/${file}`).then(m => m.default);
-			this.logger.info(`Loading Interaction ${file}`);
+			this.logger.info(`${this.shard?.ids[0] ?? "Discord Client"}`, `Loading Interaction ${file}`);
 			this.interactions.set(interaction.name.replace(/\s/g, "_"), interaction);
 		}
 	}
@@ -96,7 +93,7 @@ class Bot extends Client {
 		for (const [file, dir] of jobs) {
 			if (file.endsWith(".map")) continue;
 			const job: Job = await import(`${dir}/${file}`).then(m => m.default);
-			this.logger.info(`Loading Job ${file}`);
+			this.logger.info(`${this.shard?.ids[0] ?? "Discord Client"}`, `Loading Job ${file}`);
 			this.jobs.set(job.name, job);
 		}
 	}
