@@ -20,7 +20,6 @@ module.exports = {
 	// HTTP Server
 	http: {
 		port: 5000,
-		wsPort: 5001,
 	},
 	modules: {
 		discord: {
