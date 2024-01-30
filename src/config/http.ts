@@ -6,9 +6,4 @@ export default class HttpConfig {
 		type: "number",
 	})
 	port!: number;
-
-	@ValidateProperty({
-		type: "number",
-	})
-	wsPort!: number;
 }

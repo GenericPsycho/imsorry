@@ -4,13 +4,16 @@ import express from "express";
 import * as cookieParser from "cookie-parser";
 import { getProcessPath, getWebPublicDir } from "../utils/Runtime";
 import { error } from "../utils/Logger";
+import http from "http";
 
 export class HttpHandler {
+	private httpServer: http.Server;
 	readonly server: Express.Application;
 	readonly websockets: Server;
 	constructor() {
-		this.server = Express();
-		this.websockets = new Server();
+		this.server = express();
+		this.httpServer = http.createServer(this.server);
+		this.websockets = new Server(this.httpServer);
 
 		// this will parse Content-Type: application/json
 		this.server.use(express.json());
@@ -31,9 +34,13 @@ export class HttpHandler {
 		});
 
 		this.server.get("/", function (req, res) {
-			return res.sendFile(getProcessPath() + "/public/index.html", (err) => {
-				error("Error sending index.html", err);
+			return res.sendFile(getProcessPath() + "/public/index.html", (optErr) => {
+				if (optErr)
+					error("Error sending index.html", optErr);
 			});
 		});
+	}
+	listen(port: number, cb?: () => void) {
+		this.httpServer.listen(port, cb);
 	}
 }

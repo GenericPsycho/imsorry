@@ -84,6 +84,7 @@ export const init = async () => {
 	});
 	await emitAndAwaitMultiple(appCtx.events, [
 		"http:loadroutes",
+		"ws:loadhandlers",
 		"http:bindstatic",
 		"cli:loadcommands",
 		"tasks:loadtasks",

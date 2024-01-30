@@ -1,6 +1,7 @@
 import { Parseable, ValidateProperty } from "parzival";
 import { Response } from "express";
 import { ApplicationContext } from "./Engine";
+import SocketIO from "socket.io";
 
 @Parseable()
 export class CliCommand {
@@ -90,6 +91,25 @@ export class HTTPRouteHandler {
 	patch(req: Express.Request, res: Response): Promise<void> {
 		throw new Error("Method not implemented.");
 	}
+}
+
+class WSHandlerSettings {
+	@ValidateProperty({
+		type: "string",
+		optional: true
+	})
+	event?: string;
+}
+@Parseable()
+export class WSHandler {
+	@ValidateProperty({
+		type: "object",
+		recurse: true,
+		className: "WSHandlerSettings",
+		optional: true
+	})
+	settings?: WSHandlerSettings;
+	// TODO: Select handling strategy
 }
 
 export interface HookExecutor {
