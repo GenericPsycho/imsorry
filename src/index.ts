@@ -1,4 +1,4 @@
-import Bot from "./Bot";
+import "reflect-metadata";
+import { init } from "./application";
 
-const client = new Bot();
-client.start();
+init();

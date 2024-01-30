@@ -2,8 +2,9 @@
 	"compilerOptions": {
 		"module": "NodeNext",
 		"esModuleInterop": true,
-		"target": "ES6",
-		"moduleResolution": "Node",
+		"allowSyntheticDefaultImports": true,
+		"target": "ESNext",
+		"moduleResolution": "NodeNext",
 		"removeComments": true,
 		"outDir": "./dist",
 		"emitDecoratorMetadata": true,
@@ -11,13 +12,13 @@
 		"strict": true,
 		"strictNullChecks": true,
 		"skipLibCheck": true,
-		"sourceMap": true,
-		"baseUrl": "./src",
+		"baseUrl": ".",
 		"paths": {
-			"@/*": ["*"]
+			"@src/*": ["src/*"],
+			"@config/*": ["config/*"]
 		}
 	},
 	"include": [
 		"./src/**/*.ts"
-	]
+, "src/engine/utils/Logger.ts"	],
 }
