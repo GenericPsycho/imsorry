@@ -11,6 +11,8 @@ This bot is open source and is licensed under the [MIT License](https://opensour
 As Features are needed, they will be separated into modules, that can be easily installed.
 So the main template remains clean and without bloat.
 
+# Modules
+
 ## Included Modules
 
 - [x] Discord Client
@@ -27,3 +29,33 @@ So the main template remains clean and without bloat.
 
 but you can also create your own modules, and publish them to npm
 we'll try to mantain the name format as `udm-<name>`
+
+# Default Configuration
+
+The default configuration for UtilityDust is for a very simple discord bot, with probably a dashboard.
+As it ships default with the discord client module, and the HTTP server configured to use a **public** directory.
+
+# How to use
+
+In the future there will be a way better documentation, but for now, you can browse the source code, and see how it works.
+Specially the discord client module, as it is the most normalized as to how the application expects to be used.
+
+## Making a module
+
+The only thing you need to do to make a module, is to create a folder in the `modules` directory, and create a `index` file in it
+UtilityDust will automatically load it, expecting it to satisfy the Module type, with a respective configuration key, and eventEmitter class.
+
+As so it only expects a name, a "hooksInnerPath", load and init functions, and a eventEmitter class.
+Where
+
+- the name is a unique string name
+- the hooksInnerPath is a string that references the path to the hooks folder, relative to the module folder
+- the load function is an async function that receives the configuration, and should return the EventEmitter inheritor instance
+- the init function is an async function that receives the context, and should return nothing
+
+Apart from that you can make any folder or file in the module folder, and it will be used only if needed.
+
+### Hooks
+
+Hooks in this context are functions that are called when a certain event happens.
+They are used to extend the functionality of the application, without having to modify the engine itself.
