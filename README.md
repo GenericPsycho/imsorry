@@ -6,7 +6,7 @@
 UtilityDust is an open source NodeJS Event-Based Application Engine. Made to be easy to use, and extend.
 if you find any bugs or have any suggestions, please open an issue on the [GitHub Issues Tab](https://github.com/GaryCraft/UtilityDust/issues)
 
-This bot is open source and is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+This engine is open source and is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 As Features are needed, they will be separated into modules, that can be easily installed.
 So the main template remains clean and without bloat.
@@ -42,7 +42,7 @@ Specially the discord client module, as it is the most normalized as to how the 
 
 ## Making a module
 
-The only thing you need to do to make a module, is to create a folder in the `modules` directory, and create a `index` file in it
+The only thing you need to do to make a module, is to create a folder within the `modules` directory, and create an `index` file in it.
 UtilityDust will automatically load it, expecting it to satisfy the Module type, with a respective configuration key, and eventEmitter class.
 
 As so it only expects a name, a "hooksInnerPath", load and init functions, and a eventEmitter class.
@@ -55,7 +55,36 @@ Where
 
 Apart from that you can make any folder or file in the module folder, and it will be used only if needed.
 
-### Hooks
+## Hooks
 
 Hooks in this context are functions that are called when a certain event happens.
 They are used to extend the functionality of the application, without having to modify the engine itself.
+
+## Routes
+
+Routes are used to extend the HTTP server, and are used to handle requests.
+The routes folder also determines the structure of the URL, check the example route for more information.
+(the example route will be called if a request to /example is made)
+
+## Tasks
+
+Tasks are used to schedule functions to be called at a certain time.
+you can check the example task for more information.
+
+## Database
+
+We use TypeORM for the database, so you can use any database supported by it.
+Models will be loaded automatically, and you can use the database connection from anywhere in the application.
+To configure the database, you can use the `database` key in the configuration file.
+
+## Configuration
+
+The configuration folder will be loaded starting at the index file, and parsed automatically.
+It determines the structure of the configuration file using the parzival library.
+
+Then the configuration file is loaded, then validated and parsed, if it is not valid, it will throw an error.
+
+## Commands
+
+UtilityDust by default has a CLI, that can be used to run commands.
+You can add commands to the commands folder, and they will be loaded automatically.
