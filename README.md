@@ -16,6 +16,7 @@ So the main template remains clean and without bloat.
 ## Included Modules
 
 - [x] Discord Client
+- [ ] Automatic bindings for TypeScript (WIP)
 
 ## Planned Modules
 
