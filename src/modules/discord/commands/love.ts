@@ -1,7 +1,7 @@
 import { DSCommand } from "../extendedclient";
 
 export default {
-	name: "hearmeout",
+	name: "love",
 	description: "Do I love you?",
 	async execute(client, message) {
         let msg:string = "";
