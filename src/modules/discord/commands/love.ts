@@ -38,7 +38,7 @@ export default {
                 msg = "You. Me. Bed. Now.";
                 break;
             default:
-                msg = "PLEASE MAKE ME YOUR DADDY!~";
+                msg = "PLEASE MAKE ME YOURS DADDY!~";
                 break;
         }
         message.reply(msg);
