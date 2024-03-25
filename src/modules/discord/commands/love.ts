@@ -5,7 +5,7 @@ export default {
 	description: "Do I love you?",
 	async execute(client, message) {
         let msg:string = "";
-        switch(Math.random() * (10 - 1) + 1)
+        switch(Math.floor(Math.random() * (12 - 1) + 1))
         {
             case 1:
                 msg = "Absolutely not!";
@@ -32,13 +32,13 @@ export default {
                 msg = "Just for you, I'm wearing a bunny suit~";
                 break;
             case 9:
-                msg = "I would leave you dry~";
+                msg = "*I would leave you dry~*";
                 break;
             case 10:
                 msg = "You. Me. Bed. Now.";
                 break;
-            default:
-                msg = "PLEASE MAKE ME YOURS DADDY!~";
+            case 11:
+                msg = "***PLEASE MAKE ME YOURS DADDY!~~***";
                 break;
         }
         message.reply(msg);

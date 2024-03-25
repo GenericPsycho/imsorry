@@ -2,10 +2,10 @@ import { DSCommand } from "../extendedclient";
 
 export default {
 	name: "hearmeout",
-	description: "Y'know",
+	description: ";)",
 	async execute(client, message) {
         let msg:string = "";
-        switch(Math.random() * (5 - 1) + 1)
+        switch(Math.floor(Math.random() * (6 - 1) + 1))
         {
             case 1:
                 msg = "I'm listening~";
@@ -19,7 +19,7 @@ export default {
             case 4:
                 msg = "Speak under my booty~";
                 break;
-            default:
+            case 5:
                 msg = "Tell me more~";
                 break;
         }

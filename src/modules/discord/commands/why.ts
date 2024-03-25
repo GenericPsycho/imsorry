@@ -1,9 +1,9 @@
 import { DSCommand } from "../extendedclient";
 
 export default {
-	name: "ping",
-	description: "If I don't respond, I'm having a crisis..",
+	name: "why",
+	description: "Why do I exist?",
 	async execute(client, message) {
-		message.reply("Pong!");
+		message.reply("**Blame Lian.**");
 	},
 } satisfies DSCommand;
