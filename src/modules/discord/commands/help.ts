@@ -9,12 +9,8 @@ export default {
             .setColor(0x6633CC)
             .setTitle("Here's what I can do for you, darling~")
             .addFields(
-                { name: '!!ping', value: "If I don't respond, I'm having a crisis.." },
-                { name: '!!hearmeout', value: ";)"},
-                { name: '!!love', value: "Do I love you?"},
-                { name: '!!why', value: "Why do I exist?"},
-                { name: '!!spank', value: "You perv~"},
-                { name: '!!scream', value: "Check out how hard I can scream!"},
+                { name: 'TECHNICAL STUFF', value: "`!!ping` - If I don't respond, **I'm having a crisis...**\n`!!invite` - Bring me somewhere else!\n`!!info` - More about my insides *(that sounded weird-)*.\n`!!why` - Why do I exist?" },
+                { name: '*FUN* GAMES~', value: "`!!hearmeout` - ;)\n`!!love` - Do I love you?\n`!!spank` - You perv~\n`!!scream` - Check out how hard I can scream!\n`!!meat` - *Y'know what I'm talking about~*"},
             )
         message.reply({ embeds: [helpList] });
     },
